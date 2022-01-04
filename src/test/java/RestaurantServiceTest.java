@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.*;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,8 +47,35 @@ class RestaurantServiceTest {
     }
     //<<<<<<<<<<<<<<<<<<<<SEARCHING>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+    @Test
+    public void test_sum_of_item_should_give_an_positive_value(){
+        service.addRestaurant("Amelie's cafe","Chennai",LocalTime.parse("10:30:00"),LocalTime.parse("22:00:00"));
+        service.addRestaurant("Pantry dor","Bangalore",LocalTime.parse("10:00:00"),LocalTime.parse("23:00:00"));
 
+        service.addItemToResturantMenu("Amelie's cafe","Pizza",340);
+        service.addItemToResturantMenu("Amelie's cafe","Burger",380);
+        service.addItemToResturantMenu("Amelie's cafe","Pinacolado",640);
+        service.addItemToResturantMenu("Amelie's cafe","PanCake",440);
+        service.addItemToResturantMenu("Amelie's cafe","Pasta",240);
 
+        service.addItemToResturantMenu("Pantry dor","Idly",80);
+        service.addItemToResturantMenu("Pantry dor","Dosa",140);
+        service.addItemToResturantMenu("Pantry dor","Soup",200);
+        service.addItemToResturantMenu("Pantry dor","PannerTikka",240);
+        service.addItemToResturantMenu("Pantry dor","ChickenTikka",440);
+
+        List<String> itemToBeTested1 = new ArrayList<>();
+        itemToBeTested1.add("Pizza");
+        itemToBeTested1.add("PanCake");
+
+        List<String> itemToBeTested2 = new ArrayList<>();
+        itemToBeTested2.add("Dosa");
+        itemToBeTested2.add("ChickenTikka");
+
+        assertEquals(780,service.totalCost("Amelie's cafe",itemToBeTested1));
+        assertEquals(580,service.totalCost("Pantry dor",itemToBeTested2));
+    }
+    //>>>>>>>>>>>>>>>>>>>>>>Find Total Cost<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     //>>>>>>>>>>>>>>>>>>>>>>ADMIN: ADDING & REMOVING RESTAURANTS<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     @Test

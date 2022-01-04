@@ -31,4 +31,12 @@ public class RestaurantService {
     public List<Restaurant> getRestaurants() {
         return restaurants;
     }
+
+    public void addItemToResturantMenu(String restaurantName,String itemName, int price){
+    }
+
+    public int totalCost(String restaurant,List<String> items){
+      return 0;
+    }
+
 }
