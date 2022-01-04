@@ -33,10 +33,38 @@ public class RestaurantService {
     }
 
     public void addItemToResturantMenu(String restaurantName,String itemName, int price){
+        for(int i=0;i<restaurants.size();i++){
+            if(restaurantName.equalsIgnoreCase(restaurants.get(i).getName())){
+                Restaurant obj = restaurants.get(i);
+
+                obj.addToMenu(itemName,price);
+            }
+        }
     }
 
     public int totalCost(String restaurant,List<String> items){
-      return 0;
+        int sumOfItem=0;
+        for(int i=0;i<restaurants.size();i++){
+            if(restaurant.equalsIgnoreCase(restaurants.get(i).getName())){
+                Restaurant obj=restaurants.get(i);
+                sumOfItem=sum(obj,items);
+            }
+        }
+        return sumOfItem;
+    }
+
+    private int sum(Restaurant restaurant,List<String> itemToProccess){
+        int cost=0;
+        for(int i=0;i<itemToProccess.size();i++){
+            String itemName=itemToProccess.get(i);
+
+            for(int j=0;j<restaurant.getMenu().size();j++){
+                if(itemName.equalsIgnoreCase(restaurant.getMenu().get(j).getName())){
+                    cost=cost+restaurant.getMenu().get(j).getPrice();
+                }
+            }
+        }
+        return cost;
     }
 
 }
